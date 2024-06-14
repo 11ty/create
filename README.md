@@ -15,11 +15,11 @@ echo # Header > index.md
 echo '# Header' | out-file -encoding utf8 'index.md'
 ```
 
-Now we can tell folks to do this, everywhere and we’ll always have a UTF8 encoded file:
+Now we can tell folks to use this everywhere and we’ll always have a UTF8 encoded file at the end:
 
 ```sh
 npx @11ty/create index.md '# Heading'
 npx @11ty/create nested/index.md '# Heading'
 ```
 
-Installation should happen automatically via `npx` and we needn’t put this in a package.json.
+Installation happens on-the-fly via `npx` and we needn’t put this in a package.json.
