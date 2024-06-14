@@ -12,9 +12,10 @@ function isExistingDir(filepath) {
 }
 
 function hasFilename(filepath) {
-	if(filepath.endsWith(path.sep)) {
+	if(filepath.endsWith(path.sep) || filepath.endsWith("/")) {
 		return false;
 	}
+
 	let parsed = path.parse(filename);
 	if(!parsed.base) {
 		return false;
@@ -51,6 +52,12 @@ if(!filename || !content || !hasFilename(filename) || isExistingDir(filename)) {
 
 // Create parent dirs
 let dirs = filename.split(path.sep);
+
+// On Windows, work with forward and back slashes
+if(dirs.length === 0 && path.sep !== "/" && filename.includes("/")) {
+	dirs = filename.split("/");
+}
+
 if(dirs.length > 0 ) {
 	dirs.pop();
 
