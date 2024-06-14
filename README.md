@@ -1,6 +1,6 @@
 # `@11ty/create`
 
-A tiny command line utility to create files in a cross-platform way.
+A tiny command line utility to create files in a cross-platform way. Requires Node 18 or newer.
 
 In the quick start for Eleventy, there are different commands folks need to use based on their operating system and terminal application.
 
