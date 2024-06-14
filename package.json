@@ -7,6 +7,9 @@
 	"engines": {
 		"node": ">=18"
 	},
+	"bin": {
+		"@11ty/create": "create.js"
+	},
 	"scripts": {
 		"test": "node --test",
 		"demo": "node . sample/index.md '# Heading'"
