@@ -54,11 +54,11 @@ if(!filename || !content || !hasFilename(filename) || isExistingDir(filename)) {
 let dirs = filename.split(path.sep);
 
 // On Windows, work with forward and back slashes
-if(dirs.length === 0 && path.sep !== "/" && filename.includes("/")) {
+if(dirs.length <= 1 && path.sep !== "/" && filename.includes("/")) {
 	dirs = filename.split("/");
 }
 
-if(dirs.length > 0 ) {
+if(dirs.length > 1 ) {
 	dirs.pop();
 
 	fs.mkdirSync(dirs.join(path.sep), {
