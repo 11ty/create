@@ -1,0 +1,35 @@
+{
+  "name": "@11ty/create",
+  "version": "1.0.0",
+  "description": "A little command line utility to create files in a cross-platform way.",
+  "main": "create.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test",
+    "demo": "node . sample/index.md '# Heading'"
+  },
+  "publishConfig": {
+		"access": "public"
+	},
+  "funding": {
+		"type": "opencollective",
+		"url": "https://opencollective.com/11ty"
+	},
+  "author": "Zach Leatherman <zachleatherman@gmail.com> (https://zachleat.com/)",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/11ty/eleventy.git"
+	},
+	"bugs": "https://github.com/11ty/eleventy/issues",
+	"homepage": "https://www.11ty.dev/",
+  "license": "MIT",
+  "dependencies": {
+    "kleur": "^4.1.5"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.7"
+  }
+}
