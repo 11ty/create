@@ -5,7 +5,7 @@
 	"main": "create.js",
 	"type": "module",
 	"engines": {
-		"node": ">=18"
+		"node": ">=16"
 	},
 	"bin": {
 		"@11ty/create": "create.js"
