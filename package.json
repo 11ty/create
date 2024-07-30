@@ -24,9 +24,9 @@
 	"author": "Zach Leatherman <zachleatherman@gmail.com> (https://zachleat.com/)",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/11ty/eleventy.git"
+		"url": "git://github.com/11ty/create.git"
 	},
-	"bugs": "https://github.com/11ty/eleventy/issues",
+	"bugs": "https://github.com/11ty/create/issues",
 	"homepage": "https://www.11ty.dev/",
 	"license": "MIT",
 	"dependencies": {
