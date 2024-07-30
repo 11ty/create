@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.release.isPrerelease != true
+    # if: github.event.release.isPrerelease != true
     permissions:
       contents: read
       id-token: write
