@@ -1,6 +1,6 @@
 {
 	"name": "@11ty/create",
-	"version": "1.0.4-beta.1",
+	"version": "1.0.4",
 	"description": "A little command line utility to create files in a cross-platform way.",
 	"main": "create.js",
 	"type": "module",
