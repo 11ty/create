@@ -1,12 +1,10 @@
-name: Publish Stable Release to npm
+name: Publish Release to npm
 on:
   release:
     types: [published]
 jobs:
   build:
     runs-on: ubuntu-latest
-    # No -alpha. or -beta. in tags
-    if: ${{ !contains(github.event.release.tag_name, '-') }}
     permissions:
       contents: read
       id-token: write
@@ -19,6 +17,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
       - run: npm test
-      - run: npm publish --provenance --access=public
+      - if: ${{ env.NPM_PUBLISH_TAG != '' }}
+        run: npm publish --provenance --access=public --tag=${{ env.NPM_PUBLISH_TAG }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_PUBLISH_TAG: ${{ contains(github.event.release.tag_name, '-beta.') && 'beta' || 'latest' }}
