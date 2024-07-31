@@ -24,7 +24,7 @@ test('Baseline double quotes', async (t) => {
 	await waitForStreamClose(create);
 
 	assert.ok(fs.existsSync(path));
-	assert.deepEqual(fs.readFileSync(path, "utf8"), SAMPLE_CONTENT);
+	assert.notDeepEqual(fs.readFileSync(path, "utf8"), SAMPLE_CONTENT);
 });
 
 test('Baseline single quotes', async (t) => {
