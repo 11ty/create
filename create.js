@@ -8,6 +8,9 @@ import fs from "node:fs";
 import chalk from "kleur";
 import readline from "node:readline";
 
+const SINGLE_QUOTE = "'";
+const DOUBLE_QUOTE = '"';
+
 async function getStdIn() {
 	return new Promise((resolve, reject) => {
 		let rl = readline.createInterface({ input: process.stdin });
@@ -22,6 +25,13 @@ async function getStdIn() {
 			reject();
 		});
 	});
+}
+
+function stripQuotes(content) {
+	if(content.startsWith(SINGLE_QUOTE) && content.endsWith(SINGLE_QUOTE) || content.startsWith(DOUBLE_QUOTE) && content.endsWith(DOUBLE_QUOTE)) {
+		return content.slice(1, -1);
+	}
+	return content;
 }
 
 function isExistingDir(filepath) {
@@ -68,13 +78,16 @@ if(!content) {
 	} catch(e) {
 		// do nothing
 	}
+
+	// for Windows cmd.exe
+	content = stripQuotes(content);
 }
 
 // Input checking
 if(!filename || !content || !hasFilename(filename) || isExistingDir(filename)) {
 	console.error("Incorrect usage, expected one of:");
-	console.error("  npx @11ty/create file_path 'file_content'");
-	console.error("  echo 'file_content' | npx @11ty/create file_path");
+	console.error("  npx @11ty/create file_path 'File Content'");
+	console.error("  echo 'File Content' | npx @11ty/create file_path");
 	process.exit(1);
 }
 
