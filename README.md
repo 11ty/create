@@ -20,6 +20,7 @@ Now we can tell folks to use this everywhere and we’ll always have a UTF8 enco
 ```sh
 npx @11ty/create index.md '# Heading'
 npx @11ty/create nested/index.md '# Heading'
+echoh '# Heading' | npx @11ty/create nested/index.md
 ```
 
 Installation happens on-the-fly via `npx` and we needn’t put this in a package.json.
