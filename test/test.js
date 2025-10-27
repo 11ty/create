@@ -103,5 +103,37 @@ test('Works with stdin', async (t) => {
 
 	await waitForStreamClose(create);
 
-	assert.ok(fs.existsSync(path));
+	assert.deepEqual(fs.readFileSync(path, "utf8"), SAMPLE_CONTENT);
+});
+
+test('Trim single quotes on stdin', async (t) => {
+	t.after(() => {
+		rimrafSync("./test/stubs-stdin-single-quote/");
+	});
+
+	let echo = spawn('echo', [`'${SAMPLE_CONTENT}'`]);
+	let path = 'test/stubs-stdin-single-quote/index.md';
+	let create = spawn("node", ['.', path]);
+
+	echo.stdout.pipe(create.stdin);
+
+	await waitForStreamClose(create);
+
+	assert.deepEqual(fs.readFileSync(path, "utf8"), SAMPLE_CONTENT);
+});
+
+test('Trim double quotes on stdin', async (t) => {
+	t.after(() => {
+		rimrafSync("./test/stubs-stdin-double-quote/");
+	});
+
+	let echo = spawn('echo', [`"${SAMPLE_CONTENT}"`]);
+	let path = 'test/stubs-stdin-double-quote/index.md';
+	let create = spawn("node", ['.', path]);
+
+	echo.stdout.pipe(create.stdin);
+
+	await waitForStreamClose(create);
+
+	assert.deepEqual(fs.readFileSync(path, "utf8"), SAMPLE_CONTENT);
 });
