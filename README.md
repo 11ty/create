@@ -24,7 +24,7 @@ npx @11ty/create nested/index.md '# Heading'
 
 And in v1.0.6+ `stdin` is supported:
 ```sh
-echo '# Heading' | npx @11ty/create nested/index.md
+echo '# Heading' | npx @11ty/create index.md
 ```
 
 Installation happens on-the-fly via `npx` and we needn’t put this in a package.json.
