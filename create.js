@@ -6,6 +6,23 @@ import { parseArgs } from "node:util";
 import path from "node:path";
 import fs from "node:fs";
 import chalk from "kleur";
+import readline from "node:readline";
+
+async function getStdIn() {
+	return new Promise((resolve, reject) => {
+		let rl = readline.createInterface({ input: process.stdin });
+		let timer = setTimeout(() => {
+			reject();
+		}, 100);
+		rl.on("line", line => {
+			resolve(line);
+			clearTimeout(timer);
+		});
+		rl.on("end", () => {
+			reject();
+		});
+	});
+}
 
 function isExistingDir(filepath) {
 	return fs.existsSync(filepath) && fs.statSync(filepath).isDirectory();
@@ -38,15 +55,26 @@ let { positionals, values } = parseArgs({
 	},
 });
 
-// TODO support stdin
 // TODO check not a parent directory
 
 let { quiet, encoding } = values;
 let [ filename, content ] = positionals;
+let src;
+
+if(!content) {
+	try {
+		content = await getStdIn();
+		src = "stdin";
+	} catch(e) {
+		// do nothing
+	}
+}
 
 // Input checking
 if(!filename || !content || !hasFilename(filename) || isExistingDir(filename)) {
-	console.error("Expected usage: npx @11ty/create file_path file_content");
+	console.error("Incorrect usage, expected one of:");
+	console.error("  npx @11ty/create file_path 'file_content'");
+	console.error("  echo 'file_content' | npx @11ty/create file_path");
 	process.exit(1);
 }
 
@@ -71,5 +99,5 @@ fs.writeFileSync(filename, content, { encoding });
 
 // Output
 if(!quiet) {
-	console.log( `${chalk.gray('[11ty/create]')} Writing ${filename} ${chalk.gray(`(${(content.length/1000).toFixed(3)}kb)`)}` );
+	console.log( `${chalk.gray('[11ty/create]')} Writing ${filename} ${chalk.gray(`(${(content.length/1000).toFixed(3)}kb)${src ? ` (${src})` : ""}`)}` );
 }

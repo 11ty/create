@@ -89,3 +89,19 @@ test('Nested create', async (t) => {
 	assert.ok(fs.existsSync(path));
 	assert.deepEqual(fs.readFileSync(path, "utf8"), SAMPLE_CONTENT);
 });
+
+test('Works with stdin', async (t) => {
+	t.after(() => {
+		rimrafSync("./test/stubs-stdin/");
+	});
+
+	let echo = spawn('echo', [SAMPLE_CONTENT]);
+	let path = 'test/stubs-stdin/index.md';
+	let create = spawn("node", ['.', path]);
+
+	echo.stdout.pipe(create.stdin);
+
+	await waitForStreamClose(create);
+
+	assert.ok(fs.existsSync(path));
+});
