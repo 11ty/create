@@ -28,8 +28,9 @@ async function getStdIn() {
 }
 
 function stripQuotes(content) {
-	if(content.startsWith(SINGLE_QUOTE) && content.endsWith(SINGLE_QUOTE) || content.startsWith(DOUBLE_QUOTE) && content.endsWith(DOUBLE_QUOTE)) {
-		return content.slice(1, -1);
+	let trimmed = content.trim();
+	if(trimmed.startsWith(SINGLE_QUOTE) && trimmed.endsWith(SINGLE_QUOTE) || trimmed.startsWith(DOUBLE_QUOTE) && trimmed.endsWith(DOUBLE_QUOTE)) {
+		return trimmed.slice(1, -1);
 	}
 	return content;
 }
