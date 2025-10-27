@@ -22,7 +22,7 @@ npx @11ty/create index.md '# Heading'
 npx @11ty/create nested/index.md '# Heading'
 ```
 
-Add in v1.0.6 and newer:
+And in v1.0.6+ `stdin` is supported:
 ```sh
 echo '# Heading' | npx @11ty/create nested/index.md
 ```
