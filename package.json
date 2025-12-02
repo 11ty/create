@@ -33,6 +33,6 @@
 		"kleur": "^4.1.5"
 	},
 	"devDependencies": {
-		"rimraf": "^6.0.1"
+		"rimraf": "^6.1.2"
 	}
 }
